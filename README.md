@@ -24,13 +24,24 @@ Persönliche Konfiguration von Fedora KDE Plasma.
    - Farben & Designs/Symbole: Papirus-Dark (grey)
    - Farben & Designs/Zeiger: Future cursors von Night
 6. 'Fensterleiste nur mit Symbolen' auf 'Fensterleiste mit Symbolen und Text' ändern und konfigurieren
-7. Alternatives Anwendungsmenü wählen
-8. Erste Anwendungen installieren:
+7. Taskleistenhöhe konfigurieren:
+   - Höhe auf 48
+   - Systemabschnitt der Kontrolleiste: Symbolgröße an die Höhe der Leiste anpassen
+   - Energie und Akku: immer anzeigen
+9. Alternatives Anwendungsmenü wählen
+10. Konsole anpassen:
+    - Fenstergröße speichern abwählen
+    - Fenstertitel in der Titelleiste auswählen
+    - neues Profil anlegen
+       - Standardprofil einschalten
+       - Terminalgröße 140 x 38
+    - Bildlaufleiste/Verlauf: auf 10000 erhöhen
+12. Erste Anwendungen installieren:
    - Bitwarden
    - Synology Drive
    - Nextcloud
-9. Bitwarden einrichten und konfigurieren
-10. Synology Drive konfigurieren und in den Autostart eintragen
-11. Nach der Synchronisation '.mozilla.tar.gz' in das Home-Verzeichnis kopieren und entpacken
-12. Hintergrundbild auf SynologyDrive/Config/Wallpaper.png ändern
-13. Nextcloud einrichten
+11. Bitwarden einrichten und konfigurieren
+12. Synology Drive konfigurieren und in den Autostart eintragen
+13. Nach der Synchronisation '.mozilla.tar.gz' in das Home-Verzeichnis kopieren und entpacken
+14. Hintergrundbild auf SynologyDrive/Config/Wallpaper.png ändern
+15. Nextcloud einrichten
