@@ -1,0 +1,11 @@
+bin/busmaster-installers-3.2.2
+bin/*.exe
+bin/*.AppImage
+.config/darktable/library.db*
+.config/darktable/data.db*
+.config/micro/backups
+.config/darktable/shortcutsrc.defaults
+.config/broot/launcher
+.config/cinnamon/spices/weather@mockturtl/17.json
+bin/edit
+.config/cinnamon/spices/cinnamon-timer@jake1164/cinnamon-timer@jake1164.json

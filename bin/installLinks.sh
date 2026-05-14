@@ -1,0 +1,148 @@
+#!/usr/bin/env bash
+
+# Funktion: erzeuge symbolische Links mit erweiterter Prüfung
+# $1 Quelle:	Datei oder Verzeichnis welches verlinkt werden soll
+# $2 Ziel:		der zu erzeugende symbolische Link
+function fncLink
+{
+	echo
+	# Exisitiert das Ziel?
+	if [ -e "$2" ]
+	then
+		# ja, das Ziel existiert
+		# ist das Ziel bereits ein symbolischer Link?
+		if [ -L "$2" ]
+		then
+			# ja, das Ziel ist bereits ein symbolischer Link
+			echo "$2 ist bereits ein symbolischer Link"
+
+			# zeigt der symbolische Link nicht auf die Quelle?
+			if [[ $(readlink "$2") != "$1" ]]
+			then
+				# ja, der symbolische Link zeigt nicht auf die Quelle
+				echo "symbolischer Link $2 zeigt nicht auf die Quelle --> überschreiben"
+				# existiert die Quelle?
+				if [ -e "$1" ]
+				then
+					# ja, die Quelle existiert
+					unlink "$2"				# existierenden Link löschen
+					ln -sv "$1" "$2"		# symbolischen Link erzeugen
+				else
+					# nein, die Quelle existiert nicht
+					echo "Die Quelle existiert nicht!"
+				fi
+			fi
+		else
+			# nein, das Ziel ist kein symbolischer Link
+			# existiert die Quelle?
+			if [ -e "$1" ]
+			then
+				# ja, die Quelle existiert
+				echo "$2 ist kein symbolischer Link --> existierende Datei oder Verzeichnis sichern"
+				mv -fv "$2" "$2.saved"	# eine existierende Sicherung wird überschrieben
+				rm -fRv "$2"			# vorhandene Datei oder Verzeichnis löschen
+				ln -sv "$1" "$2"		# symbolischen Link erzeugen
+			else
+				# nein, die Quelle existiert nicht
+				echo "Die Quelle existiert nicht!"
+			fi
+		fi
+	else
+		# nein, das Ziel existiert nicht
+			# existiert die Quelle?
+			if [ -e "$1" ]
+			then
+				# ja, die Quelle existiert
+				rm -fRv "$2"			# vorhandenes Ziel löschen (evtl. fehlerhafter Link)
+				ln -sv "$1" "$2"		# symbolischen Link erzeugen
+			else
+				# nein, die Quelle existiert nicht
+				echo "Die Quelle $1 existiert nicht!"
+			fi
+	fi
+} # fncLink()
+
+
+pushd $HOME
+
+fncLink "$HOME/.fedora/.bashrc"								"$HOME/.bashrc"
+fncLink "$HOME/.fedora/.bash_logout"						"$HOME/.bash_logout"
+fncLink "$HOME/.fedora/.bash_profile"						"$HOME/.bash_profile"
+fncLink "$HOME/.fedora/.bash_aliases"						"$HOME/.bash_aliases"
+#fncLink "$HOME/.fedora/.profile"							"$HOME/.profile"
+fncLink "$HOME/.fedora/.selected_editor"					"$HOME/.selected_editor"
+fncLink "$HOME/.fedora/bin"									"$HOME/.local/bin"
+fncLink "$HOME/.fedora/.ne"									"$HOME/.ne"
+fncLink "$HOME/.fedora/.config/broot"						"$HOME/.config/broot"
+fncLink "$HOME/.fedora/.config/btop"						"$HOME/.config/btop"
+fncLink "$HOME/.fedora/.config/darktable"					"$HOME/.config/darktable"
+fncLink "$HOME/.fedora/.config/darktable"					"$HOME/.var/app/org.darktable.Darktable/config/darktable"
+fncLink "$HOME/.fedora/.config/git-graph"					"$HOME/.config/git-graph"
+fncLink "$HOME/.fedora/.config/htop"						"$HOME/.config/htop"
+fncLink "$HOME/.fedora/.config/kicad"						"$HOME/.config/kicad"
+fncLink "$HOME/.fedora/.config/lazygit"						"$HOME/.config/lazygit"
+fncLink "$HOME/.fedora/.config/micro"						"$HOME/.config/micro"
+fncLink "$HOME/.fedora/.config/vlc"							"$HOME/.config/vlc"
+#fncLink "$HOME/.fedora/.local/share/broot"					"$HOME/.local/share/broot"
+fncLink "$HOME/.fedora/.vuescan"							"$HOME/.vuescan"
+fncLink "$HOME/.fedora/Templates"							"$HOME/Vorlagen"
+
+fncLink "$HOME/.fedora/bin/e4thcom-0.8.4/e4thcom"			"$HOME/.fedora/bin/e4thcom"
+fncLink "$HOME/.fedora/bin/e4thcom-0.8.4/e4thcom.i"			"$HOME/.fedora/bin/e4thcom.i"
+
+#fncLink "$HOME/SynologyDrive/Config/.config/darktable"		"$HOME/.config/darktable"
+#fncLink "$HOME/SynologyDrive/Config/.config/darktable"		"$HOME/.var/app/org.darktable.Darktable/config/darktable"
+
+fncLink "$HOME/SynologyDrive/Config/.vuescanrc"				"$HOME/.vuescanrc"
+fncLink "$HOME/SynologyDrive/Config/.ssh"						"$HOME/.ssh"
+fncLink "$HOME/SynologyDrive/Config/.plst"						"$HOME/.plst"
+fncLink "$HOME/SynologyDrive/Config/.gitconfig"					"$HOME/.gitconfig"
+fncLink "$HOME/SynologyDrive/Config/.git-credentials"			"$HOME/.git-credentials"
+fncLink "$HOME/SynologyDrive/Config/.local/share/kicad"			"$HOME/.local/share/kicad"
+fncLink "$HOME/SynologyDrive/Config/.local/share/rhythmbox"		"$HOME/.local/share/rhythmbox"
+fncLink "$HOME/SynologyDrive/Config/.local/share/strawberry"	"$HOME/.local/share/strawberry"
+fncLink "$HOME/SynologyDrive/Config/.local/share/gnome-mines"	"$HOME/.local/share/gnome-mines"
+fncLink "$HOME/SynologyDrive/Config/.local/share/widelands"		"$HOME/.local/share/widelands"
+fncLink "$HOME/SynologyDrive/Config/.local/share/widelands"		"$HOME/.var/app/org.widelands.Widelands/.widelands"
+fncLink "$HOME/SynologyDrive/Config/.local/share/widelands"		"$HOME/.var/app/org.widelands.Widelands/data/widelands"
+
+#fncLink 	"$HOME/SynologyDrive/Config/.local/bin/avr8-gnu-toolchain-linux_x86_64"	\
+#			"$HOME/.local/bin/avr8-gnu-toolchain-linux_x86_64"
+
+fncLink "$HOME/SynologyDrive/Bilder"							"$HOME/Bilder"
+fncLink "$HOME/SynologyDrive/Dokumente"							"$HOME/Dokumente"
+fncLink "$HOME/SynologyDrive/Dokumente"							"$HOME/Documents"
+fncLink "$HOME/SynologyDrive/Downloads"							"$HOME/Downloads"
+#fncLink "$HOME/SynologyDrive/Calibre-Bibliothek"				"$HOME/Calibre-Bibliothek"
+fncLink "$HOME/SynologyDrive/Musik/Assetts"						"$HOME/Musik"
+fncLink "$HOME/SynologyDrive/Audiobooks/Assetts"				"$HOME/Audiobooks"
+fncLink "$HOME/SynologyDrive/Comics/Assetts"					"$HOME/Comics"
+#fncLink "$HOME/SynologyDrive/Scans"							"$HOME/Scans"
+#fncLink "$HOME/SynologyDrive/News"								"$HOME/News"
+
+fncLink "$HOME/Nextcloud/Photos"								"$HOME/Photos"
+fncLink "$HOME/Nextcloud/Calibre"								"$HOME/Calibre"
+#fncLink "$HOME/Nextcloud/Music"								"$HOME/Musik"
+#fncLink "$HOME/Nextcloud/Audiobooks"							"$HOME/Audiobooks"
+
+# Autostart-Links nur für User boderu
+#egrep -i boderu /etc/passwd >/dev/null
+#if [ $? -eq 0 ]
+#then
+#	echo "User boderu:"
+##	fncLink "$HOME/.mint/.config/autostart"					"$HOME/.config/autostart"
+#	if [ -L "$HOME/.config/autostart" ] && [ -d "$HOME/.config/autostart" ]
+#	then
+#		echo "Repair autostart folder."
+#		rm -rfv "$HOME/.config/_autostart"
+#		cp -rv "$(readlink -f $HOME/.config/autostart)" "$HOME/.config/_autostart"
+#		rm -rfv "$HOME/.config/autostart"
+#		mv -v "$HOME/.config/_autostart" "$HOME/.config/autostart"
+#	fi
+#
+#	fncLink "$HOME/.mint/.config/cinnamon/spices"			"$HOME/.config/cinnamon/spices"
+#fi
+
+popd
+
+# EOF

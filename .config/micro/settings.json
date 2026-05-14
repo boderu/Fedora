@@ -1,0 +1,12 @@
+{
+    "colorcolumn": 120,
+    "colorscheme": "gruvbox",
+    "diffgutter": true,
+    "hltaberrors": true,
+    "hltrailingws": true,
+    "indentchar": "",
+    "scrollbar": true,
+    "scrollbarchar": "",
+    "softwrap": true,
+    "statusformatl": "$(filename) $(modified) $(status.paste)  ft:$(opt:filetype)  $(opt:fileformat)  $(opt:encoding)  $(lines) lines ($(line),$(col))  $(percentage)%"
+}

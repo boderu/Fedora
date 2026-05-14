@@ -1,0 +1,91 @@
+#!/usr/bin/env bash
+
+$HOME/.fedora/bin/installCodecs.sh
+$HOME/.fedora/bin/installRPM.sh
+$HOME/.fedora/bin/installRust.sh
+$HOME/.fedora/bin/installFlatpak.sh
+$HOME/.fedora/bin/installDirectories.sh
+$HOME/.fedora/bin/installNerd.sh
+$HOME/.fedora/bin/installLSP.sh
+$HOME/.fedora/bin/installLazygit.sh
+$HOME/.fedora/bin/installBroot.sh
+$HOME/.fedora/bin/installXplr.sh
+$HOME/.fedora/bin/installFrontDesign.sh
+$HOME/.fedora/bin/installVueScan.sh
+$HOME/.fedora/bin/installSegger.sh
+$HOME/.fedora/bin/installVSCode.sh
+$HOME/.fedora/bin/installPython.sh
+$HOME/.fedora/bin/installRuby.sh
+$HOME/.fedora/bin/installOllama.sh
+$HOME/.fedora/bin/installFrameworks.sh
+
+#=======================================================================================================================
+echo ; echo "Remove packages that are no longer required"
+sudo dnf autoremove -y
+
+#=======================================================================================================================
+echo ; echo "Set up User Guest"
+egrep -i guest /etc/passwd >/dev/null
+if [ $? -ne 0 ]
+then
+	sudo adduser --disabled-password --gecos "Guest" guest
+	sudo adduser guest users
+	sudo passwd -d guest
+fi
+
+echo ; echo "Add users to the users and dialout groups"
+sudo adduser $USER users
+sudo adduser $USER dialout
+
+#=======================================================================================================================
+echo ; echo "Configure shared folder for all users to share files"
+if [ -d /home/Share ]
+then
+	echo "Share folder already exists"
+else
+	sudo mkdir /home/Share
+	sudo chown root:users /home/Share
+	sudo chmod ugo+rwX /home/Share
+	sudo chmod g+s /home/Share
+fi
+
+echo
+echo "Configure public (RO) folder for all users"
+if [ -d /home/Public ]
+then
+	echo "Public folder already exists"
+else
+	sudo mkdir /home/Public
+	sudo chown $USER:users /home/Public
+	sudo chmod ugo+rX /home/Public
+	sudo chmod u+w /home/Public
+	sudo chmod ug+s /home/Public
+fi
+
+#=======================================================================================================================
+#echo
+#echo "Increase limit for file system watches (inotify)"
+#if [ ! -e /etc/sysctl.d/90-inotify.conf ]
+#then
+#	sudo cp $HOME/Mint/Sytem/etc/sysctl.d/90-inotify.conf /etc/sysctl.d/
+#	sudo chown root:root /etc/sysctl.d/90-inotify.conf
+#	sudo sysctl -p --system
+#fi
+
+#=======================================================================================================================
+#echo ; echo "Set up local configurations"
+#if [ -d ".oh-my-zsh" ]
+#then
+#	cd .oh-my-zsh
+#	git fetch --all
+#	git pull
+#	cd ..
+#else
+#	git clone https://github.com/ohmyzsh/ohmyzsh.git .oh-my-zsh
+#fi
+
+#=======================================================================================================================
+$HOME/.fedora/bin/installLinks.sh
+
+
+# EOF
