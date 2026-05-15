@@ -1,0 +1,44 @@
+MenuBar=Disabled
+
+[CompactMode]
+IconSize=48
+
+[DetailsMode]
+PreviewSize=16
+
+[General]
+ConfirmClosingMultipleTabs=false
+GlobalViewProps=false
+RememberOpenedTabs=false
+ShowFullPath=true
+ShowFullPathInTitlebar=true
+ShowStatusBar=FullWidth
+ShowZoomSlider=true
+Version=202
+ViewPropsTimestamp=2026,5,12,9,46,52.063
+
+[IconsMode]
+IconSize=128
+PreviewSize=128
+
+[KFileDialog Settings]
+Places Icons Auto-resize=false
+Places Icons Static Size=22
+
+[MainWindow]
+MenuBar=Disabled
+
+[MainWindow][Toolbar mainToolBar]
+ToolButtonStyle=IconOnly
+
+[Notification Messages]
+warnAboutRisksBeforeActingAsAdmin=false
+
+[PreviewSettings]
+Plugins=audiothumbnail,windowsexethumbnail,imagethumbnail,blenderthumbnail,comicbookthumbnail,cursorthumbnail,djvuthumbnail,ebookthumbnail,exrthumbnail,jpegthumbnail,kraorathumbnail,gsf-office,windowsimagethumbnail,mobithumbnail,opendocumentthumbnail,directorythumbnail,gsthumbnail,rawthumbnail,fontthumbnail,svgthumbnail,ffmpegthumbs
+
+[Toolbar mainToolBar]
+ToolButtonStyle=IconOnly
+
+[VersionControl]
+enabledPlugins=Git

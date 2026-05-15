@@ -73,16 +73,9 @@ fi
 #fi
 
 #=======================================================================================================================
-#echo ; echo "Set up local configurations"
-#if [ -d ".oh-my-zsh" ]
-#then
-#	cd .oh-my-zsh
-#	git fetch --all
-#	git pull
-#	cd ..
-#else
-#	git clone https://github.com/ohmyzsh/ohmyzsh.git .oh-my-zsh
-#fi
+echo ; echo "Set up local configurations"
+pip install konsave
+
 
 #=======================================================================================================================
 $HOME/.fedora/bin/installLinks.sh
